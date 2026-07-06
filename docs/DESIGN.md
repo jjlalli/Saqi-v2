@@ -86,6 +86,36 @@ of logs, then compare the log against the simulation's predictions.
 
 Both are true. Lead with the one the audience cares about.
 
+## Path to product
+
+Every farm is different, but that does not make this a service. The split that makes it a
+product: the box and firmware are identical for every farm; everything farm-specific is
+data. All of it already lives in one config table (the `ZONES` table in the simulation:
+zones, areas, soil capacities). Productizing means making that table easy to create.
+
+- Kit + guided setup. The product ships as a kit: controller, N valve units, weather
+  sensor, probes. A setup wizard on a phone (Bluetooth to the box, still no internet)
+  walks the farmer through it: mark the zones (the farmer already knows where the sandy
+  patch is), pick the crop, jar test or soil-type defaults. Config is questions, not code.
+- Self-calibration. After install, the box learns from its own logs how fast each zone
+  really dries and how much each pump-hour delivers, and corrects the entered values.
+  This is what turns "needs an agronomist" into "learns your farm," and it is the next
+  research problem after the pilot.
+- The installer channel exists. Tunisia subsidizes drip irrigation through APIA, so local
+  drip installers already touch every modernizing farm. Saqi rides that: the day the
+  manifold goes in, the installer adds one box. Getting onto the subsidy-eligible
+  equipment list is the biggest commercial unlock, and it is where the national
+  water-savings argument matters even though a single well owner does not feel it.
+- Start narrow. Olives, Sidi Bou Zid, family farm as demo unit one. Then five neighbour
+  farms hand-installed, then the kit through installers, then the region.
+- Pricing follows the architecture: no server, so no subscription. Sell the box once,
+  priced like a pump accessory. Later paid extras: installation, spare probes, and a
+  multi-farm coordinator for GDAs (the v1 mesh returning as the premium tier).
+
+Known hard parts, stated plainly: hardware support in the field (a box that dies in week
+three kills village word-of-mouth), the variety of existing plumbing, and thin hardware
+margins. None of this is being built now; the pilot comes first.
+
 ## Relation to v1
 
 - v1 = the research argument (decentralization vs failure; the control loop).
