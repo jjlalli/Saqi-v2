@@ -66,6 +66,7 @@ the research track, not the product track.
 | Latching solenoid valve 12V | 2 | $30 |
 | Capacitive soil probe | 2 | $6 |
 | DHT22 temp/humidity sensor | 1 | $5 |
+| Tipping-bucket rain gauge | 1 | $10 |
 | MOSFET/driver board, wiring, enclosure | 1 | $15 |
 | Solar panel 6V 2W + 18650 + TP4056 | 1 | $15 |
 
@@ -85,6 +86,27 @@ of logs, then compare the log against the simulation's predictions.
   Water saved matters at national scale even where an individual well owner does not feel it.
 
 Both are true. Lead with the one the audience cares about.
+
+## What is not designed yet (product completeness)
+
+Stated plainly, because a design that hides its gaps is not a design.
+
+- Rain sensing. The account math includes rain but the parts list cannot measure it.
+  Add a tipping-bucket rain gauge (~$10), or infer rain when zone probes rise with no
+  irrigation. Without this the box waters on a rainy day.
+- Fail-safes. Latching valves keep their last state on power loss, so a battery failure
+  mid-irrigation means a valve stuck open. Required: max-runtime cutoff per valve,
+  watchdog reset, close-everything-on-fault, and pump dry-run protection (wells recover
+  slowly; the scheduler must respect a max daily draw).
+- Farmer interface and override. A physical switch that forces manual mode, a "water
+  now" and "skip today" control, and a minimal status view (LEDs or the Bluetooth app).
+  Nobody hands their farm to a silent box; trust is the adoption problem.
+- Water-side plumbing: the box must sit behind a filter (drip clogs on well water),
+  and pressure and well recovery rate are scheduler constraints, not footnotes.
+
+Current stage, honestly: decision logic validated in simulation; zero physical
+validation. Every remaining unknown is physical, which is why the next step is the
+bench build and the farm pilot, with the items above included.
 
 ## Path to product
 
