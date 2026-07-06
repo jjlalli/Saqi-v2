@@ -7,7 +7,7 @@ and never needs internet, a server, or a person driving out to turn the water of
 
 ## Why v2 exists
 
-[Saqi v1](https://github.com/USER/saqi) argued, in simulation, that a farm can share scarce
+[Saqi v1](https://github.com/jjlalli/Saqi) argued, in simulation, that a farm can share scarce
 water with a mesh of per-tree devices and no central computer, and that this survives network
 failures that break a cloud controller. That research stands.
 
