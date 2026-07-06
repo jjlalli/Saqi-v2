@@ -69,19 +69,36 @@ stress with zero trips, the fewest pump hours, and nothing wasted.
 
 Knowing when to water is not the hard part. Acting on it is.
 
+## The controller brain, with things going wrong
+
+`controller.py` is the reference implementation of the full loop the firmware ports:
+water accounts, rain hold, weekly probe anchoring, and the fail-safes. It replays a
+season where a probe freezes, a storm hits, the power dies mid-season, and a valve jams:
+
+![faults](saqi2_faults.png)
+
+The box detects the dead probe (and keeps that zone alive on the model alone), closes
+everything on reboot so a power cut can never leave a valve open, credits the storm
+instead of watering through it, raises exactly one alarm for the jammed valve and parks
+the zone until a human fixes it, then recovers. One subtlety worth reading in the code:
+a frozen probe looks exactly like a broken valve, so the valve check refuses testimony
+from a probe that has stopped moving.
+
 ## Running it
 
 ```bash
 pip install -r requirements.txt
-python3 saqi2.py   # -> saqi2_season.png, saqi2_timer_vs_auto.png
+python3 saqi2.py        # the strategy comparison -> saqi2_season.png, saqi2_timer_vs_auto.png
+python3 controller.py   # the fault season -> saqi2_faults.png
 ```
 
 ## Hardware target
 
 One ESP32 controller at the manifold, a latching solenoid valve per zone, one capacitive soil
-probe per zone, a small solar panel and battery. Rough parts cost for a 5-zone farm is under
-$100. A two-zone pilot on my family's farm in Sidi Bou Zid is the next step; the plan is in
-`docs/DESIGN.md`.
+probe per zone, a rain gauge, a small solar panel and battery. Rough parts cost for a 5-zone
+farm is under $100. A two-zone pilot on my family's farm in Sidi Bou Zid is the next step:
+the design is in `docs/DESIGN.md`, the wiring, calibration protocol, and acceptance checklist
+in `docs/BUILD.md`.
 
 ## Limitations
 
