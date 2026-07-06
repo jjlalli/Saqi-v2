@@ -42,6 +42,16 @@ sharing one well or canal with no central authority, which is future work.
   zone first, within the pump's daily capacity, stopping each refill on committed water
   (what has been applied, not what a lagging sensor reads) so nothing drains past the roots.
 
+## What is simulated and what the device does
+
+The zoning and the water accounting are both in this repo, with one simplification each. The
+zone map is a given input (the `ZONES` table at the top of `saqi2.py`, five zones with their
+soil capacities); on a real farm that map is drawn once, from satellite imagery and the
+farmer's knowledge, then lives on the device as exactly such a table. The ET accounting runs
+every simulated day (crop coefficient times reference ET per zone), but the simulation draws
+ET0 from typical dry-season values; the device computes it from its own weather reading.
+In short: the repo proves the decision logic, the pilot proves the physics.
+
 ## What the simulation shows
 
 A 120-day dry season on a 5-zone, 1.1-hectare farm, averaged over 30 random seasons, comparing
