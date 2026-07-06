@@ -41,7 +41,13 @@ the research track, not the product track.
    [valve zone 1]   [valve zone 2]  ...  [pump relay]
 ```
 
-- Zone map: drawn once from satellite imagery + the farmer's knowledge. Static, on-device.
+- Zone map: drawn once, static, on-device. It maps soil, not moisture: each zone's texture
+  and water-holding capacity, which do not change with weather. Sources: the farmer's own
+  knowledge of the land, a jar test per candidate zone, infiltration timing (how fast poured
+  water disappears), and satellite/soil databases (bare-soil imagery, SoilGrids) to help
+  draw the borders. A one-time moisture snapshot would be useless; that is not what this is.
+  Everything that changes day to day (weather, moisture state) is handled by the accounts
+  below, daily.
 - Water account: depletion (mm) per zone. Daily ET from temperature/humidity (FAO-56
   Hargreaves is enough), rain in, irrigation in. One capacitive probe per zone corrects
   model drift weekly.
