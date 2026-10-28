@@ -17,9 +17,10 @@ valves switching on account state on a table, then the farm.
 | Manual override switch | GPIO 13 | physical switch, forces everything closed |
 | Status LEDs (ok / watering / alarm) | GPIO 21, 22, 23 | three states a farmer can read at a glance |
 
-Power: 18650 through TP4056 charger fed by the 6V 2W panel, 3.3V regulator to the board.
-The valve pulses draw more than the regulator likes; put a capacitor (1000uF) across the
-valve supply.
+Power: 18650 through a TP4056 charger fed by the 6V 2W panel, 3.3V regulator to the board,
+and a boost converter (3.7V to 12V) for the valve supply, since the latching valves are 12V.
+The valve pulses draw more than the boost likes; put a capacitor (1000uF) across the valve
+supply.
 
 ## Firmware loop (port of controller.py, in order)
 

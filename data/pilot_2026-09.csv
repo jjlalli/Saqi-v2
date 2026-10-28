@@ -1,0 +1,11 @@
+date,weather,temp_c,zone,method,liters,minutes,note
+2026-09-01,clear,36,1,timer,32.0,40,surface pooling at the tree base
+2026-09-01,clear,36,2,committed_stop,23.5,29,
+2026-09-03,hot,38,1,timer,32.0,40,
+2026-09-03,hot,38,2,committed_stop,21.0,26,
+2026-09-05,sunny,34,1,timer,32.0,40,
+2026-09-05,sunny,34,2,committed_stop,22.0,27.5,
+2026-09-07,very hot,39,1,timer,32.0,40,
+2026-09-07,very hot,39,2,committed_stop,25.0,31,
+2026-09-09,sunny,35,1,timer,32.0,40,puddling at the tree base
+2026-09-09,sunny,35,2,committed_stop,21.5,27,

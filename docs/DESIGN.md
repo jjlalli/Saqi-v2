@@ -2,12 +2,13 @@
 
 ## The pivot, honestly
 
-v1 modelled a farm as a mesh of per-tree nodes agreeing on water with no central computer.
+v1 modelled a farm as a mesh of small nodes, one per patch of the grove, agreeing on water
+with no central computer.
 The research finding (decentralized coordination survives network failure that breaks a
 central controller) is true and stays published in the v1 repo.
 
-An interview with a working farmer (my father, olive grower in Sidi Bou Zid) changed the
-deployment design:
+Interviews with my father (a retired teacher who works our family's olive grove in Sidi
+Bouzid) and other farmers nearby changed the deployment design:
 
 1. Per-tree granularity is unnecessary. Same soil + same slope + same line = same moisture.
    The farm's real structure is 3 to 8 soil zones, not hundreds of trees.
@@ -67,22 +68,29 @@ the research track, not the product track.
 | Capacitive soil probe | 2 | $6 |
 | DHT22 temp/humidity sensor | 1 | $5 |
 | Tipping-bucket rain gauge | 1 | $10 |
-| MOSFET/driver board, wiring, enclosure | 1 | $15 |
+| H-bridge driver board, wiring, enclosure | 1 | $15 |
 | Solar panel 6V 2W + 18650 + TP4056 | 1 | $15 |
+| Boost converter 3.7V to 12V (valve supply) | 1 | $2 |
+
+The valves are latching, so the driver has to reverse polarity to close them (an H-bridge, not
+a single MOSFET), and their 12V pulse comes from the boost converter, not the 3.7V cell.
 
 Firmware loop: wake, read probe + weather, update accounts, decide, drive valves, log to
 SD/flash, deep sleep. Log everything; the pilot's first output is calibration constants,
 its second is the season data.
 
 Milestones: bench demo (two valves switching on account state), farm install, one month
-of logs, then compare the log against the simulation's predictions.
+of logs, then compare the log against the simulation's predictions. A first 10-day
+side-by-side test (one zone on a kit prototype, one on a timer) ran in September 2026; see
+the README.
 
 ## Two pitches, one box
 
 - To a farmer with a well: it waters the farm by itself, correctly for each soil, and the
   pump runs fewer hours. You stop driving out to open and close valves.
 - To a judge, journal, or admissions reader: smallholder irrigation automation that runs
-  offline for under $100, in a market where existing products stop at the notification.
+  offline for about $150 in parts on a five-zone farm, in a market where existing products
+  stop at the notification.
   Water saved matters at national scale even where an individual well owner does not feel it.
 
 Both are true. Lead with the one the audience cares about.
@@ -104,9 +112,12 @@ Stated plainly, because a design that hides its gaps is not a design.
 - Water-side plumbing: the box must sit behind a filter (drip clogs on well water),
   and pressure and well recovery rate are scheduler constraints, not footnotes.
 
-Current stage, honestly: decision logic validated in simulation; zero physical
-validation. Every remaining unknown is physical, which is why the next step is the
-bench build and the farm pilot, with the items above included.
+Current stage, honestly: decision logic validated in simulation, plus one 10-day field
+test (September 2026) where a kit prototype with the committed stop used 29% less water
+than a 40-minute timer on the neighbouring zone. Only litres and run time were logged, so
+there is no calibration data yet. Every remaining unknown is physical, which is why the
+next step is the full two-zone install with the probe log running, with the items above
+included.
 
 ## Path to product
 
@@ -128,7 +139,7 @@ zones, areas, soil capacities). Productizing means making that table easy to cre
   manifold goes in, the installer adds one box. Getting onto the subsidy-eligible
   equipment list is the biggest commercial unlock, and it is where the national
   water-savings argument matters even though a single well owner does not feel it.
-- Start narrow. Olives, Sidi Bou Zid, family farm as demo unit one. Then five neighbour
+- Start narrow. Olives, Sidi Bouzid, family farm as demo unit one. Then five neighbour
   farms hand-installed, then the kit through installers, then the region.
 - Pricing follows the architecture: no server, so no subscription. Sell the box once,
   priced like a pump accessory. Later paid extras: installation, spare probes, and a
@@ -141,5 +152,5 @@ margins. None of this is being built now; the pilot comes first.
 ## Relation to v1
 
 - v1 = the research argument (decentralization vs failure; the control loop).
-- v2 = the product design that the farmer interview produced.
+- v2 = the product design that the farmer interviews produced.
 - Future = the mesh between farms: v1's consensus over v2's controllers.
